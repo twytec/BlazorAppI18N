@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+@inject Data.I18nTextService i18n
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
+
+        <div>
+            <select @onchange="I18nChanged" style="width: 100%;">
+                @foreach (var item in i18n.SupportedLanguages)
+                {
+                    <option value="@item">@item</option>
+                }
+            </select>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+
+@code {
+
+
+
+    private void I18nChanged(ChangeEventArgs args)
+    {
+        i18n.ChangeLanguage(args.Value.ToString());
+    }
+
+}
